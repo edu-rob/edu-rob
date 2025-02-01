@@ -4,7 +4,7 @@ import { FormEventHandler } from 'react';
 import './connect.css'
 import { useState } from 'react';
 
-var device: BluetoothDevice;
+var device: BluetoothDevice | null = null;
 
 export default function Connect() {
   
@@ -25,34 +25,34 @@ export default function Connect() {
 
 function ConnectPanel() {
 
-  // const [connectionStatus, setConnectionStatus] = useState("Not connected");
+  const [connectionStatus, setConnectionStatus] = useState("Not connected");
+  const [deviceName, setDeviceName] = useState<string | null>(null);
 
-  const connectToBluetooth = () => {
-    bluetoothInit().then
-    getDevice().then((dev) => {
-      device = dev;
-    }).catch((error) => {
-      console.error(error);
-    });
-  }
-
-  var deviceIsConnected: boolean = !!device.id
-  var deviceId: String;
-
-  if (device.id == "") {
-    deviceId = "Unnamed device"
-  } else {
-    deviceId = device.id
-  }
+  const connectToBluetooth = async () => {
+    try {
+      await bluetoothInit();
+      const connectedDevice = await getDevice();
+      if (connectedDevice) {
+        setConnectionStatus("Connected");
+        setDeviceName(connectedDevice.name || "Unnamed Device");
+      } else {
+        setConnectionStatus("Not connected");
+        setDeviceName(null);
+      }
+    } catch (error) {
+      console.error("Error connecting to Bluetooth:", error);
+      setConnectionStatus("Connection failed");
+    }
+  };
 
   return (
     <div className="ConnectPanel">
-      <button className="ConnectButton" id='ConnectButton' onClick={connectToBluetooth}>
+      <button className="ConnectButton" id="ConnectButton" onClick={connectToBluetooth}>
         Connect
       </button>
       <label className="ConnectionStatus">
-        { device.id }
+        {connectionStatus}: {deviceName || "No device"}
       </label>
     </div>
-  )
+  );
 }
