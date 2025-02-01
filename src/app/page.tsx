@@ -2,7 +2,7 @@ import Image from "next/image";
 import './index.css'
 
 import useLocalStorage from 'use-local-storage';
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 import Landing from "./landing/landing";
 
