@@ -30,7 +30,7 @@ function ConnectPanel() {
 
   const connectToBluetooth = async () => {
     try {
-      await bluetoothInit();
+      bluetoothInit().then;
       const connectedDevice = await getDevice();
       if (connectedDevice) {
         setConnectionStatus("Connected");
