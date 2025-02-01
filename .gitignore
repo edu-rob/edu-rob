@@ -2,3 +2,4 @@
 .venv/
 myenv
 .env
+__pycache__/query_openai.cpython-312.pyc
