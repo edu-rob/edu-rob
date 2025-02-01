@@ -1,7 +1,6 @@
 import { dirname } from "path";
 import { fileURLToPath } from "url";
 import { FlatCompat } from "@eslint/eslintrc";
-import next from "@next/eslint-plugin-next";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -11,11 +10,10 @@ const compat = new FlatCompat({
 });
 
 const eslintConfig = [
-  next.configs["core-web-vitals"],
-  next.configs.typescript,
+  ...compat.extends("next/core-web-vitals", "next/typescript"),
   {
     rules: {
-      "no-unused-vars": "off",
+      "no-unused-vars": "off", // Disable no-unused-vars
     },
   },
 ];
