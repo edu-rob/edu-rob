@@ -2,7 +2,6 @@
 
 import { FormEventHandler } from 'react';
 import './connect.css'
-import './bluetoothHandler/blueHandle.tsx'
 import { useState } from 'react';
 
 var device: BluetoothDevice;
