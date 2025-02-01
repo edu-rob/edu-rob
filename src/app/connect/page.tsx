@@ -45,7 +45,7 @@ export default function Connect() {
 
   return (
     <div>
-      <h1> Connect Page </h1>
+      <h1 className="ConnectPageTitle"> Connect Page </h1>
       <input name="PromptInput" id=""></input>
       <textarea name="ScriptOututTextArea" id=""></textarea>
       <button className="ConnectButton" id='ConnectButton' onClick={connectToBluetooth}>

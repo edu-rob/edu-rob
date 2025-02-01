@@ -1,4 +1,4 @@
-/* General body styling */
+/* General body styling
 body {
     font-family: Arial, sans-serif;
     background-color: #f7f7f7;
@@ -12,7 +12,7 @@ body {
   }
   
   /* Container styling */
-  div {
+  /* div {
     width: 90%;
     max-width: 600px;
     background: #ffffff;
@@ -20,18 +20,17 @@ body {
     border-radius: 8px;
     padding: 20px;
     text-align: center;
-  }
+  }  */
   
   /* Page title */
-  h1 {
+  .ConnectPageTitle {
     font-size: 2rem;
     margin-bottom: 20px;
     color: #2c3e50;
   }
   
   /* Input styling */
-  input,
-  textarea {
+  .PromptInput .ScriptOututTextArea {
     width: 100%;
     margin-bottom: 15px;
     padding: 10px;
