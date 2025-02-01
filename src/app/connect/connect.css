@@ -1,4 +1,4 @@
-/* General body styling
+/* General styling */
 body {
     font-family: Arial, sans-serif;
     background-color: #f7f7f7;
@@ -8,29 +8,38 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-  }
-  
-  /* Container styling */
-  /* div {
-    width: 90%;
-    max-width: 600px;
-    background: #ffffff;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+    height: 100vh;
+}
+
+/* Main container */
+.ConnectPageContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 40px; /* Space between left and right panels */
+    max-width: 900px;
+    width: 100%;
+    background: #fff;
     padding: 20px;
-    text-align: center;
-  }  */
-  
-  /* Page title */
-  .ConnectPageTitle {
-    font-size: 2rem;
-    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Left panel: Input & Textarea */
+.InputPanelContainer {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.ConnectPageTitle {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
     color: #2c3e50;
-  }
-  
-  /* Input styling */
-  .PromptInput .ScriptOututTextArea {
+}
+
+/* Input and Textarea styling */
+input,
+textarea {
     width: 100%;
     margin-bottom: 15px;
     padding: 10px;
@@ -39,76 +48,108 @@ body {
     border-radius: 5px;
     background-color: #fafafa;
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
-  }
-  
-  input:focus,
-  textarea:focus {
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: #888;
+}
+
+input:focus,
+textarea:focus {
     outline: none;
     border-color: #3498db;
     box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
-  }
-  
-  /* Textarea */
-  textarea {
+}
+
+/* Textarea */
+textarea {
     resize: vertical;
-    min-height: 100px;
-  }
-  
-  /* Connect Button styling */
-  button.ConnectButton {
-    background-color: #3498db;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
+    min-height: 120px;
+}
+
+/* Right panel: Connection status and buttons */
+.ConnectPanelContainer {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Panel styling */
+.ConnectPanel {
+    width: 100%;
+    background: #ecf0f1;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Buttons */
+button {
+    width: 100%;
+    padding: 12px;
     font-size: 1rem;
+    border: none;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-  }
-  
-  button.ConnectButton:hover {
+    margin-bottom: 10px;
+}
+
+/* Connect Button */
+button.ConnectButton {
+    background-color: #3498db;
+    color: white;
+}
+
+button.ConnectButton:hover {
     background-color: #2980b9;
-  }
-  
-  button.ConnectButton:disabled {
+}
+
+button.ConnectButton:disabled {
     background-color: #bdc3c7;
     cursor: not-allowed;
-  }
+}
 
-  /* Disconnect Button styling */
+/* Disconnect Button */
 button.DisconnectButton {
-    background-color: #e74c3c; /* Red color for disconnect action */
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    font-size: 1rem;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  button.DisconnectButton:hover {
-    background-color: #c0392b; /* Darker red on hover */
-  }
-  
-  button.DisconnectButton:disabled {
-    background-color: #bdc3c7; /* Gray out if disabled */
+    background-color: #e74c3c;
+    color: white;
+}
+
+button.DisconnectButton:hover {
+    background-color: #c0392b;
+}
+
+button.DisconnectButton:disabled {
+    background-color: #bdc3c7;
     cursor: not-allowed;
-  }
-  
-  /* Responsive adjustments */
-  @media (max-width: 768px) {
-    div {
-      padding: 15px;
+}
+
+/* Status Label */
+.ConnectionStatus {
+    display: block;
+    margin-top: 15px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .ConnectPageContainer {
+        flex-direction: column;
+        align-items: center;
     }
-  
-    h1 {
-      font-size: 1.8rem;
+
+    .ConnectPanelContainer {
+        width: 100%;
     }
-  
-    button.ConnectButton {
-      width: 100%;
-      padding: 12px;
+
+    .ConnectPanel {
+        width: 100%;
     }
-  }
-  
+}

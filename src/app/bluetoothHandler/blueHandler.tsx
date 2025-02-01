@@ -38,7 +38,7 @@ export async function bluetoothInit() {
       device.gatt.disconnect(); // Disconnect from the device
       return ('Device disconnected:' + device.name);
     } else {
-      return 'No device is connected.';
+      return 'No device is connected';
     }
   }
 

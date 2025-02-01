@@ -1,31 +1,29 @@
 "use client";
 
-import { FormEventHandler } from 'react';
-import './connect.css'
-import { useState } from 'react';
-import { bluetoothInit, getDevice, disconnectDevice } from '../bluetoothHandler/blueHandler';
-
-var device: BluetoothDevice | null = null;
+import { FormEventHandler } from "react";
+import "./connect.css";
+import { useState } from "react";
+import { bluetoothInit, getDevice, disconnectDevice } from "../bluetoothHandler/blueHandler";
 
 export default function Connect() {
-  
   return (
     <div className="ConnectPageContainer">
-      <div>
-        <h1 className="ConnectPageTitle"> Connect Page </h1>
-        <input name="PromptInput" id=""></input>
-        <textarea name="ScriptOututTextArea" id=""></textarea>
+      {/* Left panel for input and textarea */}
+      <div className="LeftPanel">
+        <h1 className="ConnectPageTitle">Bluetooth Connection</h1>
+        <input name="PromptInput" id="PromptInput" placeholder="Enter a command..." />
+        <textarea name="ScriptOutputTextArea" id="ScriptOutputTextArea" placeholder="Output will appear here..."></textarea>
       </div>
+
+      {/* Right panel for connection status and buttons */}
       <div className="ConnectPanelContainer">
-        <ConnectPanel/>
+        <ConnectPanel />
       </div>
     </div>
-    
   );
 }
 
 function ConnectPanel() {
-
   const [connectionStatus, setConnectionStatus] = useState("Not connected");
   const [deviceName, setDeviceName] = useState<string | null>(null);
 
@@ -42,13 +40,15 @@ function ConnectPanel() {
       }
     } catch (error) {
       console.error("Error connecting to Bluetooth: ", error);
-      setConnectionStatus("Connection failed: " + String(error));
+      setConnectionStatus("Connection failed");
     }
   };
 
   const disconnectFromBluetooth = () => {
-    setConnectionStatus(disconnectDevice())
-  }
+    disconnectDevice();
+    setConnectionStatus("Not connected");
+    setDeviceName(null);
+  };
 
   return (
     <div className="ConnectPanel">
