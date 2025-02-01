@@ -2,6 +2,7 @@
 
 import { FormEventHandler } from 'react';
 import './connect.css'
+import '../bluetoothHandler/blueHandler'
 import { useState } from 'react';
 
 var device: BluetoothDevice | null = null;
