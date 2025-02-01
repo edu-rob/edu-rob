@@ -17,14 +17,14 @@ export default function NavBar() {
             key: "home",
             class: "bi-house-door-fill",
             iconClass: "HomeIcon",
-            redirectTo: "/",
+            redirectTo: "/landing",
             onClick: () => {}
         }
     ]
     const rightNavBarItems: NavBarItem[] = [
         {
             key: "connect",
-            class: "bi-chat-left-text-fill",
+            class: "bi-gear-wide-connected",
             iconClass: "ConnectIcon",
             redirectTo: "/connect",
             onClick: () => {}
