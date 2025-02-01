@@ -33,6 +33,15 @@ export async function bluetoothInit() {
     console.log("connected");
   }
 
+  export function disconnectDevice(): string {
+    if (device?.gatt?.connected) {
+      device.gatt.disconnect(); // Disconnect from the device
+      return ('Device disconnected:' + device.name);
+    } else {
+      return 'No device is connected.';
+    }
+  }
+
   export async function getDevice(): Promise<BluetoothDevice> {
     return device;
   }

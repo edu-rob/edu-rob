@@ -3,7 +3,7 @@
 import { FormEventHandler } from 'react';
 import './connect.css'
 import { useState } from 'react';
-import { bluetoothInit, getDevice } from '../bluetoothHandler/blueHandler';
+import { bluetoothInit, getDevice, disconnectDevice } from '../bluetoothHandler/blueHandler';
 
 var device: BluetoothDevice | null = null;
 
@@ -41,15 +41,22 @@ function ConnectPanel() {
         setDeviceName(null);
       }
     } catch (error) {
-      console.error("Error connecting to Bluetooth:", error);
-      setConnectionStatus("Connection failed");
+      console.error("Error connecting to Bluetooth: ", error);
+      setConnectionStatus("Connection failed: " + String(error));
     }
   };
+
+  const disconnectFromBluetooth = () => {
+    setConnectionStatus(disconnectDevice())
+  }
 
   return (
     <div className="ConnectPanel">
       <button className="ConnectButton" id="ConnectButton" onClick={connectToBluetooth}>
         Connect
+      </button>
+      <button className="DisconnectButton" id="DisconnectButton" onClick={disconnectFromBluetooth}>
+        Disconnect
       </button>
       <label className="ConnectionStatus">
         {connectionStatus}: {deviceName || "No device"}

@@ -54,7 +54,7 @@ body {
     min-height: 100px;
   }
   
-  /* Button styling */
+  /* Connect Button styling */
   button.ConnectButton {
     background-color: #3498db;
     color: #fff;
@@ -72,6 +72,27 @@ body {
   
   button.ConnectButton:disabled {
     background-color: #bdc3c7;
+    cursor: not-allowed;
+  }
+
+  /* Disconnect Button styling */
+button.DisconnectButton {
+    background-color: #e74c3c; /* Red color for disconnect action */
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button.DisconnectButton:hover {
+    background-color: #c0392b; /* Darker red on hover */
+  }
+  
+  button.DisconnectButton:disabled {
+    background-color: #bdc3c7; /* Gray out if disabled */
     cursor: not-allowed;
   }
   
