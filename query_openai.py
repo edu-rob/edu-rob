@@ -2,6 +2,12 @@ import openai
 import os
 from dotenv import load_dotenv
 
+def md_to_python(md):
+    """
+    Removes the ```python from the markdown code block
+    """
+    return md.replace("```python", "").replace("```", "")
+
 
 def query_llm(prompt):
     """
@@ -25,7 +31,7 @@ def query_llm(prompt):
 
     response = client.chat.completions.create(model="gpt-4o",messages=messages)
 
-    return response.choices[0].message.content
+    return md_to_python(response.choices[0].message.content)
 
 
 if __name__ == "__main__":
