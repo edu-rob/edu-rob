@@ -1,3 +1,5 @@
+"use client";
+
 import "./navBar.css";
 import Link from "next/link";
 

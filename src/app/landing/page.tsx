@@ -1,3 +1,5 @@
+"use client";
+
 import './landing.css'
 import NavBar from "../components/navBar/navBar";
 
