@@ -11,7 +11,7 @@ def md_to_python(md):
 
 def query_llm(prompt):
     """
-    Queries openai API and returns a ChatGPT python generated file for getting 
+    Queries openai API and returns a ChatGPT-generated script (as a string) for getting 
     the machine instructions (FORWARDS, BACKWARDS, LEFT, RIGHT)
     """
     
