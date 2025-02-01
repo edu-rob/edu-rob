@@ -2,6 +2,28 @@ import openai
 import os
 from dotenv import load_dotenv
 
+# In this file, functions for treating strings and querying the OpenAI API are defined
+
+def print_line_numbers(code):
+    """
+    Adds line numbers to the code
+    """
+    lines = code.split("\n")
+    i = 0
+    line_number = 1
+    number_of_of_lines = len(lines)
+    while line_number < number_of_of_lines + 1:
+
+        if "()" in lines[i]:
+            number_of_white_caracters = len(lines[i]) - len(lines[i].lstrip())
+            lines.insert(i+1,lines[i][:number_of_white_caracters] + f"print({line_number})")
+            i += 2
+        else :
+            i += 1
+        line_number += 1
+    
+    return "\n".join(lines)
+
 def md_to_python(md):
     """
     Removes the ```python from the markdown code block
