@@ -1,11 +1,27 @@
 import Image from "next/image";
+import './index.css'
+
+import useLocalStorage from 'use-local-storage';
+import { useRouter } from "next/router";
+
 import NavBar from "../components/navBar/navBar";
 import Landing from "../pages/landing/landing";
 
 export default function Home() {
+
+  const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const [theme, setTheme] = useLocalStorage('theme', isDarkMode ? 'dark' : 'light');
+
+  const changeTheme = () => {
+    setTheme((prev) => {
+      return (prev === 'dark' ? 'light' : 'dark');
+    })
+  }
+
+
   return (
   <>
-    <NavBar />
+    <NavBar changeTheme={changeTheme} currentTheme={theme} />
     <Landing />
   </>
     // <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
