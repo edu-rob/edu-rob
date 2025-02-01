@@ -4,7 +4,6 @@ import { FormEventHandler } from "react";
 import "./connect.css";
 import { useState } from "react";
 import { bluetoothInit, getDevice, disconnectDevice } from "../bluetoothHandler/blueHandler";
-import NavBar from "../components/navBar/navBar";
 
 
 export default function Connect() {
