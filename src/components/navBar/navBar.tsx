@@ -1,11 +1,6 @@
 import "./navBar.css";
 import Link from "next/link";
 
-interface Props {
-    changeTheme: () => void,
-    currentTheme: string,
-  }  
-
 interface NavBarItem {
     key: string,
     class: string,
@@ -16,7 +11,7 @@ interface NavBarItem {
   }
   
 
-export default function NavBar(props: Props) {
+export default function NavBar() {
     const leftNavBarItems: NavBarItem[] = [
         {
             key: "home",
@@ -35,10 +30,6 @@ export default function NavBar(props: Props) {
             onClick: () => {}
         }
     ]
-
-    const toggleTheme = () => {
-        props.changeTheme();
-      }
     
 
     return (
@@ -54,35 +45,14 @@ export default function NavBar(props: Props) {
 
             <MenuSection data={rightNavBarItems} />
         </div>    
-        <div className='MenuCollapse' id='collapse-menu'>
-            <div className='CollapseIconBar'>
-                <button onClick={toggleTheme} className='ThemeToggle'>
-                    Change Theme
-                    {props.currentTheme === 'light' ? <LightIcon /> : <DarkIcon />}
-                </button>
-            </div>
-        </div>
     </div>
     )
 }
-
-function DarkIcon() {
-    return (
-      <i className='bi-moon-fill ThemeIcon'></i>
-    );
-  }
-  
-  function LightIcon() {
-    return (
-      <i className='bi-brightness-high-fill ThemeIcon'></i>
-    );
-  }
   
   interface MenuProps {
     data: NavBarItem[],
   }
   
-
 
 function MenuSection(props: MenuProps) {
     return (

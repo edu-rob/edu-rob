@@ -9,19 +9,19 @@ import Landing from "../pages/landing/landing";
 
 export default function Home() {
 
-  const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  const [theme, setTheme] = useLocalStorage('theme', isDarkMode ? 'dark' : 'light');
+  // const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  // const [theme, setTheme] = useLocalStorage('theme', isDarkMode ? 'dark' : 'light');
 
-  const changeTheme = () => {
-    setTheme((prev) => {
-      return (prev === 'dark' ? 'light' : 'dark');
-    })
-  }
+  // const changeTheme = () => {
+  //   setTheme((prev) => {
+  //     return (prev === 'dark' ? 'light' : 'dark');
+  //   })
+  // }
 
 
   return (
   <>
-    <NavBar changeTheme={changeTheme} currentTheme={theme} />
+    <NavBar/>
     <Landing />
   </>
     // <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
