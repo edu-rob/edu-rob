@@ -4,11 +4,14 @@ import { FormEventHandler } from "react";
 import "./connect.css";
 import { useState } from "react";
 import { bluetoothInit, getDevice, disconnectDevice } from "../bluetoothHandler/blueHandler";
+import NavBar from "../components/navBar/navBar";
+
 
 export default function Connect() {
   return (
     <div className="ConnectPageContainer">
       {/* Left panel for input and textarea */}
+      <NavBar />
       <div className="LeftPanel">
         <h1 className="ConnectPageTitle">Bluetooth Connection</h1>
         <input name="PromptInput" id="PromptInput" placeholder="Enter a command..." />

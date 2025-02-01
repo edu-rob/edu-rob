@@ -4,6 +4,16 @@ let device: BluetoothDevice;
 
 export async function bluetoothInit() {
     if (!navigator.bluetooth) console.log("Error in connecting");
+    // If a device was previously connected, disconnect and remove reference
+    if (device) {
+      try {
+        device.gatt?.disconnect();
+        console.log(`Disconnected from ${device.name}`);
+      } catch (error) {
+        console.warn("Error while disconnecting:", error);
+      }
+    }
+
     if (!device) await requestDevice();
   
     const connectButton = document.querySelector("ConnectButton");
@@ -18,6 +28,7 @@ export async function bluetoothInit() {
     const options = {
       /* UUID stuff goes here... */
       acceptAllDevices: true,
+      optionalServices:["battery_service"]
     };
     device = await navigator.bluetooth.requestDevice(options);
     device.addEventListener("gattserverdisconnected", connectDevice);
@@ -33,13 +44,13 @@ export async function bluetoothInit() {
     console.log("connected");
   }
 
-  export function disconnectDevice(): string {
+  export function disconnectDevice(): void {
     if (device?.gatt?.connected) {
       device.gatt.disconnect(); // Disconnect from the device
       window.location.reload(); // Refresh the window so that new connections can be made
-      return ('Device disconnected:' + device.name);
+      console.log('Device disconnected:' + device.name);
     } else {
-      return 'No device is connected';
+      console.log('No device is connected');
     }
   }
 
