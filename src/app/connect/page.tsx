@@ -9,18 +9,23 @@ var device: BluetoothDevice;
 export default function Connect() {
   
   return (
-    <div>
-      <h1 className="ConnectPageTitle"> Connect Page </h1>
-      <input name="PromptInput" id=""></input>
-      <textarea name="ScriptOututTextArea" id=""></textarea>
-
+    <div className="ConnectPageContainer">
+      <div>
+        <h1 className="ConnectPageTitle"> Connect Page </h1>
+        <input name="PromptInput" id=""></input>
+        <textarea name="ScriptOututTextArea" id=""></textarea>
+      </div>
+      <div className="ConnectPanelContainer">
+        <ConnectPanel/>
+      </div>
     </div>
+    
   );
 }
 
 function ConnectPanel() {
 
-  const [connectionStatus, setConnectionStatus] = useState("Not connected");
+  // const [connectionStatus, setConnectionStatus] = useState("Not connected");
 
   const connectToBluetooth = () => {
     bluetoothInit().then
