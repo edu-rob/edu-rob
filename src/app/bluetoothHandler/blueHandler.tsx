@@ -36,6 +36,7 @@ export async function bluetoothInit() {
   export function disconnectDevice(): string {
     if (device?.gatt?.connected) {
       device.gatt.disconnect(); // Disconnect from the device
+      window.location.reload(); // Refresh the window so that new connections can be made
       return ('Device disconnected:' + device.name);
     } else {
       return 'No device is connected';
