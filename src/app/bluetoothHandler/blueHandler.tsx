@@ -27,9 +27,11 @@ export async function bluetoothInit() {
   async function requestDevice() {
     const options = {
       /* UUID stuff goes here... */
-      acceptAllDevices: true,
-      optionalServices:["battery_service"]
+      filters: [
+        {namePrefix: "ESP32" } // Match devices whose names start with "ESP32"
+      ],
     };
+
     device = await navigator.bluetooth.requestDevice(options);
     device.addEventListener("gattserverdisconnected", connectDevice);
   }
@@ -39,7 +41,7 @@ export async function bluetoothInit() {
       throw new Error('Device or GATT server is not available');
     }
 
-    const server = await device.gatt.connect();
+    await device.gatt.connect();
   
     console.log("connected");
   }
