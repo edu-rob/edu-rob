@@ -37,6 +37,13 @@ function ConnectPanel() {
   }
 
   var deviceIsConnected: boolean = !!device.id
+  var deviceId: String;
+
+  if (device.id == "") {
+    deviceId = "Unnamed device"
+  } else {
+    deviceId = device.id
+  }
 
   return (
     <div className="ConnectPanel">
@@ -44,7 +51,7 @@ function ConnectPanel() {
         Connect
       </button>
       <label className="ConnectionStatus">
-        {device.id}
+        { device.id }
       </label>
     </div>
   )
