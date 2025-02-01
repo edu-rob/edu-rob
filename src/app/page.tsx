@@ -10,8 +10,7 @@ import Connect from "./connect/page";
 export default function Home() {
 
   return (
-    // <Landing />
-    <Connect />
+    <Landing />
   );
 }
 
