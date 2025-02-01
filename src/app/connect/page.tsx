@@ -2,8 +2,8 @@
 
 import { FormEventHandler } from 'react';
 import './connect.css'
-import '../bluetoothHandler/blueHandler'
 import { useState } from 'react';
+import { bluetoothInit, getDevice } from '../bluetoothHandler/blueHandler';
 
 var device: BluetoothDevice | null = null;
 
@@ -31,7 +31,7 @@ function ConnectPanel() {
 
   const connectToBluetooth = async () => {
     try {
-      bluetoothInit().catch;
+      await bluetoothInit();
       const connectedDevice = await getDevice();
       if (connectedDevice) {
         setConnectionStatus("Connected");

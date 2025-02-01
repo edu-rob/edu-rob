@@ -2,7 +2,7 @@
 
 let device: BluetoothDevice;
 
-async function bluetoothInit() {
+export async function bluetoothInit() {
     if (!navigator.bluetooth) console.log("Error in connecting");
     if (!device) await requestDevice();
   
@@ -33,6 +33,6 @@ async function bluetoothInit() {
     console.log("connected");
   }
 
-  async function getDevice(): Promise<BluetoothDevice> {
+  export async function getDevice(): Promise<BluetoothDevice> {
     return device;
   }
