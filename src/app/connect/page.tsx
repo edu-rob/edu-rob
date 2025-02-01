@@ -1,3 +1,5 @@
+"use client";
+
 import { FormEventHandler } from 'react';
 import './connect.css'
 /// <reference types="web-bluetooth" />
