@@ -11,8 +11,7 @@ export default function Connect() {
   return (
     <div className="ConnectPageContainer">
       {/* Left panel for input and textarea */}
-      <NavBar />
-      <div className="LeftPanel">
+       <div className="LeftPanel">
         <h1 className="ConnectPageTitle">Bluetooth Connection</h1>
         <input name="PromptInput" id="PromptInput" placeholder="Enter a command..." />
         <textarea name="ScriptOutputTextArea" id="ScriptOutputTextArea" placeholder="Output will appear here..."></textarea>
