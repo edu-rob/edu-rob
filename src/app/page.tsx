@@ -4,12 +4,14 @@ import './index.css'
 import useLocalStorage from 'use-local-storage';
 import { useRouter } from "next/navigation";
 
-import Landing from "./landing/landing";
+import Landing from "./landing/page";
+import Connect from "./connect/page";
 
 export default function Home() {
 
   return (
-    <Landing />
+    // <Landing />
+    <Connect />
   );
 }
 
