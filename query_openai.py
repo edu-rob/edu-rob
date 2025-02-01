@@ -13,7 +13,7 @@ def query_llm(prompt):
     openai_api_key = os.getenv("OPENAI_API_KEY")
     client = openai.OpenAI(api_key=openai_api_key)
 
-    with open("moving_instances.py", "r") as file:
+    with open("moving_api.py", "r") as file:
         moving_definition = file.read()
         
     messages=[
