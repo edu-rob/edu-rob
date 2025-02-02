@@ -8,7 +8,6 @@ interface NavBarItem {
     class: string,
     iconClass: string,
     redirectTo: string,
-    // link: boolean,
     onClick: () => void
   }
   
@@ -39,11 +38,9 @@ export default function NavBar() {
         <div className="NavBar">
             <MenuSection data={leftNavBarItems} />
 
-            <Link className='NavBarTitle' href="/landing" style={{ textDecoration: 'inherit', color: 'inherit' }}>
                 <h1 className='NavBarTitleText' style={{ fontSize: 'inherit' }}>
                     EduRob
                 </h1>
-            </Link>
 
             <MenuSection data={rightNavBarItems} />
         </div>    

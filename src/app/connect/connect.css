@@ -1,81 +1,219 @@
-/* Main container */
-.ConnectPageContainer {
-    display: flex;
-    flex-direction: row;
-    gap: 40px; /* Space between left and right panels */
-    max-width: 900px;
+/* General Styling */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    color: #333;
+  }
+  
+  /* Navbar Styling */
+  .Navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    background: #fff;
+    height: 60px;
+    background-color: #2c3e50;
+    color: whitesmoke;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .Navbar h1 {
+    margin: 0;
+    font-size: 1.5rem;
+  }
+  
+  .Navbar button {
+    background: none;
+    border: none;
+    color: whitesmoke;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+  
+  .Navbar button:hover {
+    color: #1abc9c;
+  }
+  
+  /* Landing Page Styling */
+  .LandingPageContainer {
+    margin-top: 60px; /* Offset for fixed navbar */
+  }
+  
+  .HeroSection {
+    text-align: center;
+    margin-top: 20px;
+    padding: 50px 20px;
+    background: linear-gradient(120deg, #3498db, #1abc9c);
+    color: whitesmoke;
+  }
+  
+  .HeroTitle {
+    font-size: 3rem;
+    margin-bottom: 20px;
+  }
+  
+  .HeroSubtitle {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+  }
+  
+  .HeroButton {
+    background-color: #ffffff;
+    color: #3498db;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .HeroButton:hover {
+    background-color: #3498db;
+    color: whitesmoke;
+  }
+  
+  /* Features Section */
+  .FeaturesSection {
+    padding: 50px 20px;
+    background: #f4f4f4;
+    text-align: center;
+  }
+  
+  .SectionTitle {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+  }
+  
+  .FeatureCards {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .FeatureCard {
+    background: whitesmoke;
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 300px;
+    width: 100%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .FeatureCard:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  .FeatureIcon {
+    font-size: 2.5rem;
+    color: #3498db;
+    margin-bottom: 20px;
+  }
+  
+  .FeatureTitle {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+  
+  .FeatureDescription {
+    font-size: 1rem;
+    color: #555;
+  }
+  
+  /* Call-to-Action Section */
+  .CTASection {
+    text-align: center;
+    padding: 50px 20px;
+    background: linear-gradient(120deg, #1abc9c, #16a085);
+    color: whitesmoke;
+  }
+  
+  .CTATitle {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+  
+  .CTADescription {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+  }
+  
+  .CTAButton {
+    background-color: whitesmoke;
+    color: #16a085;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .CTAButton:hover {
+    background-color: #16a085;
+    color: whitesmoke;
+  }
+  
+  /* Bluetooth Connection Section */
+  .BluetoothConnectionSection {
+    padding: 50px 20px;
+    background: #ffffff;
+  }
+  
+  .BluetoothConnectionContainer {
+    max-width: 800px;
+    margin: 0 auto;
+    background: #ecf0f1;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-/* Left panel: Input & Textarea */
-.InputPanelContainer {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-.ConnectPageTitle {
+  }
+  
+  .ConnectPageTitle {
     font-size: 1.8rem;
     margin-bottom: 15px;
+    text-align: center;
     color: #2c3e50;
-}
-
-/* Input and Textarea styling */
-input,
-textarea {
+  }
+  
+  .InputPanelContainer input,
+  .InputPanelContainer textarea {
     width: 100%;
     margin-bottom: 15px;
+    resize: vertical;
     padding: 10px;
     font-size: 1rem;
     border: 1px solid #ddd;
     border-radius: 5px;
     background-color: #fafafa;
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-input::placeholder,
-textarea::placeholder {
+  }
+  
+  .InputPanelContainer input::placeholder,
+  .InputPanelContainer textarea::placeholder {
     color: #888;
-}
-
-input:focus,
-textarea:focus {
+  }
+  
+  .InputPanelContainer input:focus,
+  .InputPanelContainer textarea:focus {
     outline: none;
     border-color: #3498db;
     box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
-}
-
-/* Textarea */
-textarea {
-    resize: vertical;
-    min-height: 120px;
-}
-
-/* Right panel: Connection status and buttons */
-.ConnectPanelContainer {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-/* Panel styling */
-.ConnectPanel {
-    width: 100%;
-    background: #ecf0f1;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-/* Buttons */
-button {
+  }
+  
+  /* Buttons */
+  button {
     width: 100%;
     padding: 12px;
     font-size: 1rem;
@@ -84,59 +222,71 @@ button {
     cursor: pointer;
     transition: background-color 0.3s ease;
     margin-bottom: 10px;
-}
-
-/* Connect Button */
-button.ConnectButton {
+  }
+  
+  /* Connect Button */
+  .ConnectButton {
     background-color: #3498db;
-    color: white;
-}
-
-button.ConnectButton:hover {
+    color: whitesmoke;
+  }
+  
+  .ConnectButton:hover {
     background-color: #2980b9;
-}
-
-button.ConnectButton:disabled {
-    background-color: #bdc3c7;
-    cursor: not-allowed;
-}
-
-/* Disconnect Button */
-button.DisconnectButton {
+  }
+  
+  /* Disconnect Button */
+  .DisconnectButton {
     background-color: #e74c3c;
-    color: white;
-}
-
-button.DisconnectButton:hover {
+    color: whitesmoke;
+  }
+  
+  .DisconnectButton:hover {
     background-color: #c0392b;
-}
+  }
 
-button.DisconnectButton:disabled {
-    background-color: #bdc3c7;
-    cursor: not-allowed;
-}
+  .SubmitButton {
+    background-color: #1abc9c; 
+    color: whitesmoke;
+  }
 
-/* Status Label */
-.ConnectionStatus {
+  .SubmitButton:hover {
+    background-color: #16a085;
+  }
+  
+  /* Status Label */
+  .ConnectionStatus {
     display: block;
     margin-top: 15px;
     font-size: 1.2rem;
     font-weight: bold;
     color: #2c3e50;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .ConnectPageContainer {
-        flex-direction: column;
-        align-items: center;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .HeroTitle {
+      font-size: 2rem;
     }
-
-    .ConnectPanelContainer {
-        width: 100%;
+  
+    .FeatureCards {
+      flex-direction: column;
     }
-
-    .ConnectPanel {
-        width: 100%;
+  
+    .FeatureCard {
+      max-width: 100%;
     }
-}
+  
+    .BluetoothConnectionContainer {
+      width: 100%;
+      padding: 15px;
+    }
+  
+    .CTATitle {
+      font-size: 2rem;
+    }
+  
+    .CTADescription {
+      font-size: 1rem;
+    }
+  }
+  

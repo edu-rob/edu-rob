@@ -1,6 +1,11 @@
 /// <reference types="web-bluetooth" />
 
 let device: BluetoothDevice;
+let server: BluetoothRemoteGATTServer;
+let service: BluetoothRemoteGATTService;
+let characteristic: BluetoothRemoteGATTCharacteristic;
+const SERVICE_UUID: string = ""
+const CHARACTERISTIC_UUID: string = ""
 
 export async function bluetoothInit() {
     if (!navigator.bluetooth) console.log("Error in connecting");
@@ -28,7 +33,9 @@ export async function bluetoothInit() {
     const options = {
       /* UUID stuff goes here... */
       filters: [
-        {namePrefix: "ESP32" } // Match devices whose names start with "ESP32"
+        {namePrefix: "RobBT" } /* Match devices whose names start with "
+                                * RobBT" and then followed by some number
+                                */
       ],
     };
 
@@ -41,9 +48,24 @@ export async function bluetoothInit() {
       throw new Error('Device or GATT server is not available');
     }
 
-    await device.gatt.connect();
+    server = await device.gatt.connect();
+    service = await server.getPrimaryService(SERVICE_UUID);
+    characteristic = await service.getCharacteristic(CHARACTERISTIC_UUID);
   
     console.log("connected");
+  }
+
+  export async function sendDataToDevice(data: string): Promise<boolean> {
+    try {
+      const encoder = new TextEncoder();
+      const encodedData = encoder.encode(data);
+
+      await characteristic.writeValue(encodedData);
+      return true;
+    } catch(err) {
+      console.log(err)
+      return false;
+    }
   }
 
   export function disconnectDevice(): void {
