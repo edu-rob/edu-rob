@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import "./connect.css";
-import { bluetoothInit, getDevice, disconnectDevice, sendDataToDevice } from "../bluetoothHandler/blueHandler";
+import { bluetoothInit, getDevice, disconnectDevice, sendDataToDevice, getDataFromDevice } from "../bluetoothHandler/blueHandler";
 import NavBar from "../components/navBar/navBar";
 
 // State to hold the input value
@@ -97,7 +97,8 @@ function ConnectPanel({ inputValue }: { inputValue: string }) {
   };
 
   const sendData = () => {
-  sendDataToDevice(inputValue)
+    getDataFromDevice()
+    sendDataToDevice(inputValue)
   }
 
   return (

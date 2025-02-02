@@ -73,6 +73,12 @@ export async function bluetoothInit() {
     }
   }
 
+  export async function getDataFromDevice(): Promise<void> {
+
+    let readData = await characteristic.readValue()
+    console.log("Data was read: " + readData)
+  }
+
   export function disconnectDevice(): void {
     if (device?.gatt?.connected) {
       device.gatt.disconnect(); // Disconnect from the device
