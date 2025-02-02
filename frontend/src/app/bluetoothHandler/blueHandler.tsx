@@ -1,6 +1,6 @@
 /// <reference types="web-bluetooth" />
 
-let device: BluetoothDevice | null = null;
+let device: BluetoothDevice;
 let server: BluetoothRemoteGATTServer;
 let service: BluetoothRemoteGATTService;
 let characteristic: BluetoothRemoteGATTCharacteristic;
@@ -84,11 +84,6 @@ export async function bluetoothInit() {
     }
   }
 
-  export function getDeviceName(): string {
-    let id = device?.id
-    if (id) {
-      return id
-    }  else {
-      return ""
-    }
+  export function getDevice(): BluetoothDevice {
+    return device;
   }
