@@ -20,7 +20,7 @@ def query_llm(prompt):
     """
 
     load_dotenv()
-    openai_api_key = os.getenv("OPENAI_API_KEY")
+    openai_api_key = 
     client = openai.OpenAI(api_key=openai_api_key)
 
     with open(ROBOT_API_FILE, "r") as file:

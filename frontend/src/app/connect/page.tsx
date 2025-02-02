@@ -206,7 +206,7 @@ function ConnectPanel({ inputValue, textAreaValue, execRespValue, setTextAreaVal
       setTextAreaValue(data.code);
       sendDataToDevice(data.robot_commands).then(r => console.log("Response from Rob:" + r))
       console.log("Sending code: " + data.robot_commands)
-    })
+    }).catch(err => console.log(err))
   }
 
   const [exampleData, setExampleData] = useState<[ExampleFile] | []>([])
@@ -227,7 +227,7 @@ function ConnectPanel({ inputValue, textAreaValue, execRespValue, setTextAreaVal
 
     <div className="ConnectPanel">
       <ConnectionStatusButton connectionStatus={connectionStatus} connectToBluetooth={connectToBluetooth}
-                              disconnectFromBluetooth={disconnectFromBluetooth}/>
+        disconnectFromBluetooth={disconnectFromBluetooth} />
       <button className="GenerateButton" id="GenerateButton" onClick={genCode}>
         Generate Code
       </button>
@@ -270,16 +270,16 @@ function ConnectionStatusButton({ connectionStatus, connectToBluetooth, disconne
     disconnectFromBluetooth: () => void
   }) {
   if (connectionStatus == "Connected") {
-        return (
-        <button className="DisconnectButton" id="DisconnectButton" onClick={disconnectFromBluetooth}>
-          Disconnect
-        </button>
-      )
+    return (
+      <button className="DisconnectButton" id="DisconnectButton" onClick={disconnectFromBluetooth}>
+        Disconnect
+      </button>
+    )
   } else {
-        return (
-        <button className="ConnectButton" id="ConnectButton" onClick={connectToBluetooth}>
-          Connect
-        </button>
-  )
+    return (
+      <button className="ConnectButton" id="ConnectButton" onClick={connectToBluetooth}>
+        Connect
+      </button>
+    )
   }
 }

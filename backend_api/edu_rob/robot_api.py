@@ -1,10 +1,10 @@
 def forwards():
     '''The robot moves forward by 1 unit'''
-    print('FORWARD', end=" ")
+    print('FORWARDS', end=" ")
 
 def backwards():
     '''The robot moves backward by 1 unit'''
-    print('BACKWARD', end=" ")
+    print('BACKWARDS', end=" ")
 
 def left():
     '''The robot moves left by 90 degrees'''
