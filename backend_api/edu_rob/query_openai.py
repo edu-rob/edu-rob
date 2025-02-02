@@ -1,6 +1,6 @@
 import openai
 from dotenv import load_dotenv
-from .constants import ROBOT_API
+from .constants import ROBOT_API_FILE
 
 # In this file, functions for treating strings and querying the OpenAI API are defined
 
@@ -21,7 +21,7 @@ def query_llm(prompt):
     openai_api_key = os.getenv("OPENAI_API_KEY")
     client = openai.OpenAI(api_key=openai_api_key)
 
-    with open(ROBOT_API, "r") as file:
+    with open(ROBOT_API_FILE, "r") as file:
         moving_definition = file.read()
         
     messages=[
