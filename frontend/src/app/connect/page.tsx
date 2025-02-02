@@ -270,16 +270,16 @@ function ConnectionStatusButton({ connectionStatus, connectToBluetooth, disconne
     disconnectFromBluetooth: () => void
   }) {
   if (connectionStatus == "Connected") {
-    return (
+        return (
+        <button className="DisconnectButton" id="DisconnectButton" onClick={disconnectFromBluetooth}>
+          Disconnect
+        </button>
+      )
+  } else {
+        return (
         <button className="ConnectButton" id="ConnectButton" onClick={connectToBluetooth}>
           Connect
         </button>
   )
-  } else {
-    return (
-        <button className="DisconnectButton" id="DisconnectButton" onClick={disconnectFromBluetooth}>
-          Disconnect
-        </button>
-    )
   }
 }
