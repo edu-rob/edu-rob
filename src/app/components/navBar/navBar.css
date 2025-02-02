@@ -1,7 +1,6 @@
 /* Wrapper for Navbar */
 .NavBarWrapper {
   padding: 0;
-  margin-bottom: 20px;
   display: flex;
   flex-direction: column;
   border-bottom: 1px solid #ddd; /* Light border for separation */
@@ -23,6 +22,7 @@
   justify-content: center; /* Center the title horizontally */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
   z-index: 1000; /* Ensure it stays above other elements */
+  margin-inline: 10px;
 }
 
 /* Navbar Title */
