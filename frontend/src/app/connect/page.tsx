@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, ReactElement } from "react";
 import "./connect.css";
 import { bluetoothInit, getDevice, disconnectDevice, sendDataToDevice, getDataFromDevice } from "../bluetoothHandler/blueHandler";
 import NavBar from "../components/navBar/navBar";
@@ -23,8 +23,8 @@ export default function Connect() {
 
       {/* Bluetooth Connection Section */}
       <BluetoothConnect inputValue={inputValue} setInputValue={setInputValue}
-       textAreaValue={textAreaValue} setTextAreaValue={setTextAreaValue}
-       execRespValue={execRespValue} setExecResp={setExecResp} />
+        textAreaValue={textAreaValue} setTextAreaValue={setTextAreaValue}
+        execRespValue={execRespValue} setExecResp={setExecResp} />
     </>
   );
 }
@@ -81,7 +81,7 @@ function BluetoothConnect({
   setTextAreaValue,
   execRespValue,
   setExecResp
-  }: {
+}: {
   inputValue: string;
   setInputValue: React.Dispatch<React.SetStateAction<string>>;
   textAreaValue: string;
@@ -99,36 +99,42 @@ function BluetoothConnect({
     setTextAreaValue(event.target.value); // Update the state with the text area's value
   };
 
-  return(
+  return (
     <section className="BluetoothConnectionSection">
-        <div className="BluetoothConnectionContainer">
-          <h1 className="ConnectPageTitle">Bluetooth Connection</h1>
-          <div className="InputPanelContainer">
-            <input 
-              name="PromptInput"
-              id="PromptInput"
-              type="text"
-              placeholder="Enter a prompt..."
-              value={inputValue} // Controlled input value
-              onChange={handleInputChange} // Update state on input change
-              />
-            <textarea
-              name="ScriptOutputTextArea"
-              id="ScriptOutputTextArea"
-              placeholder="Output will appear here..."
-              value={textAreaValue}
-              onChange={handleTextAreaChange}
-               ></textarea>
-          </div>
-          <ConnectPanel inputValue={inputValue} textAreaValue={textAreaValue}
-           execRespValue={execRespValue} setExecResp={setExecResp} />
+      <div className="BluetoothConnectionContainer">
+        <h1 className="ConnectPageTitle">Bluetooth Connection</h1>
+        <div className="InputPanelContainer">
+          <input
+            name="PromptInput"
+            id="PromptInput"
+            type="text"
+            placeholder="Enter a prompt..."
+            value={inputValue} // Controlled input value
+            onChange={handleInputChange} // Update state on input change
+          />
+          <textarea
+            name="ScriptOutputTextArea"
+            id="ScriptOutputTextArea"
+            placeholder="Output will appear here..."
+            value={textAreaValue}
+            onChange={handleTextAreaChange}
+          ></textarea>
         </div>
-      </section>
+        <ConnectPanel inputValue={inputValue} textAreaValue={textAreaValue}
+          execRespValue={execRespValue} setExecResp={setExecResp} />
+      </div>
+    </section>
   )
 }
 
-function ConnectPanel({ inputValue, textAreaValue, execRespValue, setExecResp }: 
-  { inputValue: string; textAreaValue: string, execRespValue: string, 
+interface ExampleFile {
+  name: string,
+  content: string
+}
+
+function ConnectPanel({ inputValue, textAreaValue, execRespValue, setExecResp }:
+  {
+    inputValue: string; textAreaValue: string, execRespValue: string,
     setExecResp: React.Dispatch<React.SetStateAction<string>>
   }) {
   const [connectionStatus, setConnectionStatus] = useState("Not connected");
@@ -159,24 +165,38 @@ function ConnectPanel({ inputValue, textAreaValue, execRespValue, setExecResp }:
 
   const sendCode = () => {
     // sendDataToDevice()
-    api.post("/execute", {"code": textAreaValue}).then(response => {
+    api.post("/execute", { "code": textAreaValue }).then(response => {
       let toSubmit = response.data
       console.log("Code executed: " + toSubmit);
       setExecResp(toSubmit);
       console.log("Sending code: " + toSubmit);
       return;
     })
-    .catch(err => { console.log('SENDING CODE ERROR!: ', err); })
+      .catch(err => { console.log('SENDING CODE ERROR!: ', err); })
   }
 
   const genCode = () => {
     /* TODO: Debug */
-    api.post("/generate", {"prompt": inputValue}).then(response => {
+    api.post("/generate", { "prompt": inputValue }).then(response => {
       console.log("Generated code: " + response.data);
       sendDataToDevice(response.data)
       console.log("Sending code: " + response.data)
     })
   }
+
+  const [exampleData, setExampleData] = useState<[ExampleFile] | []>([])
+
+  useEffect(() => {
+    api.get("/examples")
+      .then(resp => {
+        console.log(resp.data)
+      })
+      .catch(err => {
+        console.log("Err getting examples", err)
+      })
+
+    setExampleData([])
+  }, [])
 
   return (
     <div className="ConnectPanel">
@@ -195,6 +215,19 @@ function ConnectPanel({ inputValue, textAreaValue, execRespValue, setExecResp }:
       <label className="ConnectionStatus">
         {connectionStatus}: {deviceName || "No device"}
       </label>
+      <div className="examplePanel">
+        <div className="examplePanelText">
+
+        </div>
+        <div className="examplePanelFiles">
+          {exampleData.length == 0 ? null :
+            <select>
+              {exampleData.map(({ name }, ind) => {
+                return <option id={ind.toString()} value={ind}>{name}</option>
+              })}
+            </select>}
+        </div>
+      </div>
     </div>
   );
 }

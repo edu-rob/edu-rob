@@ -1,7 +1,9 @@
 import os
 import sys
 
+
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from io import StringIO
 
 from . import schemas
@@ -9,6 +11,18 @@ from .query_openai import query_llm
 from .constants import FUNCTION_SET, ROBOT_API_FILE, EXAMPLES_FOLDER
 
 app = FastAPI()
+
+origins = [
+    "*"
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 def print_line_numbers(code: str) -> str:
     """
