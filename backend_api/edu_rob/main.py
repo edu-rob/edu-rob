@@ -69,6 +69,8 @@ def generate_code(generate: schemas.Generate, debug: bool = False):
     return schemas.GenerationResponse(robot_commands=robot_commands, err=err, code=gen_code)
 
 
+# app.mount("/", SPAStaticFiles(directory=".//app/build", html=True), name="frontend")
+
 if __name__ == "__main__":
     print(print_line_numbers(
 """for i in range(10):
