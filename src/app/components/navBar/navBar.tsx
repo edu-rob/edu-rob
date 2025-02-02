@@ -7,7 +7,7 @@ export default function NavBar() {
     return (
     <div className="NavBarWrapper">
         <div className="NavBar">
-                <h1 className='NavBarTitleText' style={{ fontSize: 'inherit' }}>
+                <h1 className='NavBarTitleText'>
                     EduRob
                 </h1>
         </div>    
