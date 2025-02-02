@@ -3,7 +3,7 @@ import os
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from query_openai import print_line_numbers
+from backend_api.edu_rob.query_openai import print_line_numbers
 
 def test_print_line_numbers():
     code = '''for _ in range(10):
