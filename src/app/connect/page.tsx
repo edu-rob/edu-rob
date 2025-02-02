@@ -1,46 +1,49 @@
 "use client";
 
-import { FormEventHandler } from "react";
-import "./connect.css";
 import { useState } from "react";
+import "./connect.css";
 import { bluetoothInit, getDevice, disconnectDevice } from "../bluetoothHandler/blueHandler";
 import NavBar from "../components/navBar/navBar";
 
-
 export default function Connect() {
   return (
-    <div className="ConnectPageContainer">
+    <>
+      {/* Navbar */}
       <NavBar />
+
+      {/* Landing Page Section */}
       <Landing />
 
-      {/* Left panel for input and textarea */}
-       <div className="LeftPanel">
-        <h1 className="ConnectPageTitle">Bluetooth Connection</h1>
-        <input name="PromptInput" id="PromptInput" placeholder="Enter a command..." />
-        <textarea name="ScriptOutputTextArea" id="ScriptOutputTextArea" placeholder="Output will appear here..."></textarea>
-      </div>
-
-      {/* Right panel for connection status and buttons */}
-      <div className="ConnectPanelContainer">
-        <ConnectPanel />
-      </div>
-    </div>
+      {/* Bluetooth Connection Section */}
+      <BluetoothConnect />
+    </>
   );
+}
+
+function BluetoothConnect() {
+  return(
+    <section className="BluetoothConnectionSection">
+        <div className="BluetoothConnectionContainer">
+          <h1 className="ConnectPageTitle">Bluetooth Connection</h1>
+          <div className="InputPanelContainer">
+            <input name="PromptInput" id="PromptInput" placeholder="Enter a command..." />
+            <textarea name="ScriptOutputTextArea" id="ScriptOutputTextArea" placeholder="Output will appear here..."></textarea>
+          </div>
+          <ConnectPanel />
+        </div>
+      </section>
+  )
 }
 
 function Landing() {
   return (
     <div className="LandingPageContainer">
-      {/* Hero Section */}
       <header className="HeroSection">
         <h1 className="HeroTitle">Transforming Education with Robotics</h1>
         <p className="HeroSubtitle">
           EduRob combines cutting-edge robotics with immersive learning to shape the future of education.
         </p>
-          {/* <button className="HeroButton">Get Started</button> */}
       </header>
-
-      {/* Features Section */}
       <section className="FeaturesSection">
         <h2 className="SectionTitle">Why Choose EduRob?</h2>
         <div className="FeatureCards">
@@ -53,7 +56,7 @@ function Landing() {
           </div>
           <div className="FeatureCard">
             <i className="fas fa-graduation-cap FeatureIcon"></i>
-            <h3 className="FeatureTitle">Personalized Learning</h3>
+            <h3 className="FeatureTitle">Personalised Learning</h3>
             <p className="FeatureDescription">
               Tailor the learning experience to individual student needs and interests.
             </p>
@@ -67,8 +70,6 @@ function Landing() {
           </div>
         </div>
       </section>
-
-      {/* Call-to-Action Section */}
       <section className="CTASection">
         <h2 className="CTATitle">Ready to Shape the Future?</h2>
         <p className="CTADescription">
@@ -76,11 +77,6 @@ function Landing() {
         </p>
         <button className="CTAButton">Join Now</button>
       </section>
-
-      {/* Footer */}
-      <footer className="Footer">
-        <p className="FooterText">© 2025 EduRob. All rights reserved.</p>
-      </footer>
     </div>
   );
 }
