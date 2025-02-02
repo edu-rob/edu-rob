@@ -64,8 +64,9 @@ export async function bluetoothInit() {
       const encoder = new TextEncoder();
       const encodedData = encoder.encode(data);
 
-      await characteristic.writeValueWithoutResponse(encodedData);
+      let response = await characteristic.writeValueWithResponse(encodedData);
       console.log("Sent data: " + data)
+      console.log("Response: " + response)
       return true;
     } catch(err) {
       console.log(err)
