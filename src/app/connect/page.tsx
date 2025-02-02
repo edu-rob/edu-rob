@@ -75,7 +75,6 @@ function Landing() {
         <p className="CTADescription">
           Join thousands of educators and students who are transforming education through robotics.
         </p>
-        <button className="CTAButton">Join Now</button>
       </section>
     </div>
   );
