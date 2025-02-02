@@ -57,11 +57,11 @@ def execute_code(code: str) -> tuple[str, str]:
         return result, error
 
 @app.get("/api/examples/")
-def get_examples() -> dict[str, str]:
-    examples = {}
+def get_examples() -> list[schemas.ExampleResponse]:
+    examples = []
     for filename in os.listdir(EXAMPLES_FOLDER):
         with open(os.path.join(EXAMPLES_FOLDER, filename), "r") as file:
-            examples.update({filename: file.read()})
+            examples.append(schemas.ExampleResponse(name=filename, contents=file.read()))
     return examples
 
 @app.post("/api/execute", response_model=schemas.ExecutionResponse)
@@ -70,7 +70,7 @@ def run_code(execute: schemas.Execute, debug: bool = False):
 
     robot_commands, err = execute_code(code)
 
-    return schemas.ExecutionResponse(robot_commands=robot_commands, err=err)
+    return schemas.ExecutionResponse(robot_commands=robot_commands.split(), err=err)
 
 @app.post("/api/generate", response_model=schemas.GenerationResponse)
 def generate_code(generate: schemas.Generate, debug: bool = False):
@@ -78,7 +78,7 @@ def generate_code(generate: schemas.Generate, debug: bool = False):
     code = print_line_numbers(gen_code) if debug else gen_code
     print(code)
     robot_commands, err = execute_code(code)
-    return schemas.GenerationResponse(robot_commands=robot_commands, err=err, code=gen_code)
+    return schemas.GenerationResponse(robot_commands=robot_commands.split(), err=err, code=gen_code)
 
 
 # app.mount("/", SPAStaticFiles(directory=".//app/build", html=True), name="frontend")
