@@ -6,9 +6,10 @@ import { bluetoothInit, getDevice, disconnectDevice, sendDataToDevice } from "..
 import NavBar from "../components/navBar/navBar";
 
 // State to hold the input value
-const [inputValue, setInputValue] = useState("");
 
 export default function Connect() {
+  const [inputValue, setInputValue] = useState("");
+
   return (
     <>
       {/* Navbar */}
@@ -18,7 +19,7 @@ export default function Connect() {
       <Landing />
 
       {/* Bluetooth Connection Section */}
-      <BluetoothConnect />
+      <BluetoothConnect inputValue={inputValue} setInputValue={setInputValue} />
     </>
   );
 }
@@ -68,7 +69,7 @@ function Landing() {
   );
 }
 
-function ConnectPanel() {
+function ConnectPanel({ inputValue }: { inputValue: string }) {
   const [connectionStatus, setConnectionStatus] = useState("Not connected");
   const [deviceName, setDeviceName] = useState<string | null>(null);
 
@@ -117,7 +118,12 @@ function ConnectPanel() {
   );
 }
 
-function BluetoothConnect() {
+function BluetoothConnect({
+  inputValue,
+  setInputValue}: {
+  inputValue: string;
+  setInputValue: React.Dispatch<React.SetStateAction<string>>;
+}) {
 
   // Handler for the input's onChange event
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -139,7 +145,7 @@ function BluetoothConnect() {
               />
             <textarea name="ScriptOutputTextArea" id="ScriptOutputTextArea" placeholder="Output will appear here..."></textarea>
           </div>
-          <ConnectPanel />
+          <ConnectPanel inputValue={inputValue} />
         </div>
       </section>
   )
