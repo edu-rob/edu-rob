@@ -118,10 +118,11 @@ function BluetoothConnect({
             placeholder="Output will appear here..."
             value={textAreaValue}
             onChange={handleTextAreaChange}
+            rows={20}
           ></textarea>
         </div>
         <ConnectPanel inputValue={inputValue} textAreaValue={textAreaValue}
-          execRespValue={execRespValue} setExecResp={setExecResp} />
+          execRespValue={execRespValue} setExecResp={setExecResp} setTextAreaValue={setTextAreaValue} />
       </div>
     </section>
   )
@@ -129,13 +130,13 @@ function BluetoothConnect({
 
 interface ExampleFile {
   name: string,
-  content: string
+  contents: string
 }
 
-function ConnectPanel({ inputValue, textAreaValue, execRespValue, setExecResp }:
+function ConnectPanel({ inputValue, textAreaValue, execRespValue, setExecResp, setTextAreaValue }:
   {
     inputValue: string; textAreaValue: string, execRespValue: string,
-    setExecResp: React.Dispatch<React.SetStateAction<string>>
+    setExecResp: React.Dispatch<React.SetStateAction<string>>, setTextAreaValue: React.Dispatch<React.SetStateAction<string>>
   }) {
   const [connectionStatus, setConnectionStatus] = useState("Not connected");
   const [deviceName, setDeviceName] = useState<string | null>(null);
@@ -189,13 +190,13 @@ function ConnectPanel({ inputValue, textAreaValue, execRespValue, setExecResp }:
   useEffect(() => {
     api.get("/examples")
       .then(resp => {
-        console.log(resp.data)
+        const data = resp.data
+        console.log(data)
+        setExampleData(data)
       })
       .catch(err => {
         console.log("Err getting examples", err)
       })
-
-    setExampleData([])
   }, [])
 
   return (
@@ -217,13 +218,22 @@ function ConnectPanel({ inputValue, textAreaValue, execRespValue, setExecResp }:
       </label>
       <div className="examplePanel">
         <div className="examplePanelText">
-
+          Or choose an example program!
         </div>
         <div className="examplePanelFiles">
           {exampleData.length == 0 ? null :
-            <select>
+            <select
+              onChange={e => {
+                const options = [...e.target.selectedOptions];
+                const values = options.map(option => option.value);
+                const ind = parseInt(values[0])
+                console.log("setting", ind)
+                console.log("with", exampleData[ind].contents)
+                setTextAreaValue(exampleData[ind].contents)
+              }}
+            >
               {exampleData.map(({ name }, ind) => {
-                return <option id={ind.toString()} value={ind}>{name}</option>
+                return <option key={ind} value={ind}>{name}</option>
               })}
             </select>}
         </div>

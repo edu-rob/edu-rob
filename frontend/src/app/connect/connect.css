@@ -287,10 +287,22 @@ button {
   }
 }
 
-.PromptInput {
+#PromptInput {
   max-width: 96%;
 }
 
 #ScriptOutputTextArea {
   max-width: 96%;
+}
+
+.examplePanel {
+  display: flex;
+  flex-direction: row;
+  padding: 20px;
+}
+
+.examplePanelText {}
+
+.examplePanelFiles {
+  margin-left: 20px;
 }
