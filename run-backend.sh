@@ -1,0 +1,1 @@
+python -m uvicorn backend_api.edu_rob.main:app --reload

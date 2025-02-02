@@ -50,7 +50,7 @@ def execute_code(code: str) -> tuple[str, str]:
 
         exec(file.read() + "\n" + code)
 
-        result = new_stdout.getvalue().strip()
+        result = new_stdout.getvalue().strip()[:-1]
         error = new_stderr.getvalue().strip()
 
         sys.stdout = old_stdout
