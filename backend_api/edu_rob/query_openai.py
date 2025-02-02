@@ -1,3 +1,5 @@
+import os
+
 import openai
 from dotenv import load_dotenv
 from .constants import ROBOT_API_FILE

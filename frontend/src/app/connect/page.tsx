@@ -2,7 +2,7 @@
 
 import { useState, useEffect, ReactElement } from "react";
 import "./connect.css";
-import { bluetoothInit, getDevice, disconnectDevice, sendDataToDevice, getDataFromDevice } from "../bluetoothHandler/blueHandler";
+import { bluetoothInit, getDevice, disconnectDevice, sendDataToDevice } from "../bluetoothHandler/blueHandler";
 import NavBar from "../components/navBar/navBar";
 import { api } from "../page";
 
@@ -179,9 +179,15 @@ function ConnectPanel({ inputValue, textAreaValue, execRespValue, setTextAreaVal
   const sendCode = () => {
     // sendDataToDevice()
     api.post("/execute", { "code": textAreaValue }).then(response => {
-      let toSubmit = response.data
-      console.log("Code executed: " + toSubmit);
-      console.log("Sending code: " + toSubmit);
+      let data: executeResponse = response.data
+      if (data.error != "") {
+        setErrorValue(data.error)
+      }
+      console.log("Commands to be executed: " + data.robot_commands);
+      sendDataToDevice(data.robot_commands).then(r => {
+        console.log("Response from Rob: " + r)
+      })
+      console.log("Sending command to Rob: " + data.robot_commands);
       return;
     })
       .catch(err => { console.log('SENDING CODE ERROR!: ', err); })
@@ -192,13 +198,14 @@ function ConnectPanel({ inputValue, textAreaValue, execRespValue, setTextAreaVal
     api.post("/generate", { "prompt": inputValue }).then(response => {
       let data: genResponse = response.data
 
-      if (data.error == "") {
+      if (data.error != "") {
         setErrorValue(data.error)
       }
 
       console.log("Generated code: " + data.code);
       setTextAreaValue(data.code);
-      console.log("Sending code: " + data.code)
+      sendDataToDevice(data.robot_commands).then(r => console.log("Response from Rob:" + r))
+      console.log("Sending code: " + data.robot_commands)
     })
   }
 
@@ -217,13 +224,10 @@ function ConnectPanel({ inputValue, textAreaValue, execRespValue, setTextAreaVal
   }, [])
 
   return (
+
     <div className="ConnectPanel">
-      <button className="ConnectButton" id="ConnectButton" onClick={connectToBluetooth}>
-        Connect
-      </button>
-      <button className="DisconnectButton" id="DisconnectButton" onClick={disconnectFromBluetooth}>
-        Disconnect
-      </button>
+      <ConnectionStatusButton connectionStatus={connectionStatus} connectToBluetooth={connectToBluetooth}
+                              disconnectFromBluetooth={disconnectFromBluetooth}/>
       <button className="GenerateButton" id="GenerateButton" onClick={genCode}>
         Generate Code
       </button>
@@ -257,4 +261,25 @@ function ConnectPanel({ inputValue, textAreaValue, execRespValue, setTextAreaVal
       </div>
     </div>
   );
+}
+
+function ConnectionStatusButton({ connectionStatus, connectToBluetooth, disconnectFromBluetooth }:
+  {
+    connectionStatus: string;
+    connectToBluetooth: () => void
+    disconnectFromBluetooth: () => void
+  }) {
+  if (connectionStatus == "Connected") {
+    return (
+        <button className="ConnectButton" id="ConnectButton" onClick={connectToBluetooth}>
+          Connect
+        </button>
+  )
+  } else {
+    return (
+        <button className="DisconnectButton" id="DisconnectButton" onClick={disconnectFromBluetooth}>
+          Disconnect
+        </button>
+    )
+  }
 }

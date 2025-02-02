@@ -1,6 +1,6 @@
 /// <reference types="web-bluetooth" />
 
-let device: BluetoothDevice;
+let device: BluetoothDevice | null = null;
 let server: BluetoothRemoteGATTServer;
 let service: BluetoothRemoteGATTService;
 let characteristic: BluetoothRemoteGATTCharacteristic;
@@ -74,12 +74,6 @@ export async function bluetoothInit() {
     }
   }
 
-  export async function getDataFromDevice(): Promise<void> {
-
-    let readData = await characteristic.readValue()
-    console.log("Data was read: " + readData)
-  }
-
   export function disconnectDevice(): void {
     if (device?.gatt?.connected) {
       device.gatt.disconnect(); // Disconnect from the device
@@ -90,6 +84,11 @@ export async function bluetoothInit() {
     }
   }
 
-  export async function getDevice(): Promise<BluetoothDevice> {
-    return device;
+  export function getDeviceName(): string {
+    let id = device?.id
+    if (id) {
+      return id
+    }  else {
+      return ""
+    }
   }
