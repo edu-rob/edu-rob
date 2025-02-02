@@ -37,6 +37,7 @@ export async function bluetoothInit() {
                                 * RobBT" and then followed by some number
                                 */
       ],
+      optionalServices: [SERVICE_UUID]
     };
 
     device = await navigator.bluetooth.requestDevice(options);
@@ -49,10 +50,13 @@ export async function bluetoothInit() {
     }
 
     server = await device.gatt.connect();
+    console.log("Server: " + server)
     service = await server.getPrimaryService(SERVICE_UUID);
+    console.log("Service: " + service)
     characteristic = await service.getCharacteristic(CHARACTERISTIC_UUID);
+    console.log("Characteristic: " + characteristic)
   
-    console.log("connected");
+    console.log("connected!");
   }
 
   export async function sendDataToDevice(data: string): Promise<boolean> {
@@ -60,7 +64,8 @@ export async function bluetoothInit() {
       const encoder = new TextEncoder();
       const encodedData = encoder.encode(data);
 
-      await characteristic.writeValue(encodedData);
+      await characteristic.writeValueWithoutResponse(encodedData);
+      console.log("Sent data: " + data)
       return true;
     } catch(err) {
       console.log(err)
