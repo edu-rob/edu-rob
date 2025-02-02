@@ -31,8 +31,7 @@ export default function Connect() {
 function Landing() {
   return (
     <div className="LandingPageContainer">
-      <NavBar />
-      /* Hero Section */
+      {/* Hero Section */}
       <header className="HeroSection">
         <h1 className="HeroTitle">Transforming Education with Robotics</h1>
         <p className="HeroSubtitle">
