@@ -1,13 +1,16 @@
 from pydantic import BaseModel
 
-class Test(BaseModel):
-    test_response: str
+from enum import Enum
+
+class ExampleResponse(BaseModel):
+    name: str
+    contents: str
 
 class Execute(BaseModel):
     code: str
 
 class ExecutionResponse(BaseModel):
-    robot_commands: str | None = None
+    robot_commands: list[str]
     error: str | None = None
 
 class Generate(BaseModel):
