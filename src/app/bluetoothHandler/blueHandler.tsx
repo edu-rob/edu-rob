@@ -4,8 +4,8 @@ let device: BluetoothDevice;
 let server: BluetoothRemoteGATTServer;
 let service: BluetoothRemoteGATTService;
 let characteristic: BluetoothRemoteGATTCharacteristic;
-const SERVICE_UUID: string = ""
-const CHARACTERISTIC_UUID: string = ""
+const SERVICE_UUID: string = "b0fb72c7-adb9-4e75-b8da-4228a4341af7"
+const CHARACTERISTIC_UUID: string = "e5bb21f5-ae3b-4959-8815-fcfa0627091f"
 
 export async function bluetoothInit() {
     if (!navigator.bluetooth) console.log("Error in connecting");
