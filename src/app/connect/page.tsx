@@ -97,7 +97,6 @@ function ConnectPanel({ inputValue }: { inputValue: string }) {
   };
 
   const sendData = () => {
-    // getDataFromDevice()
     sendDataToDevice(inputValue)
   }
 
