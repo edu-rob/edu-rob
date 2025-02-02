@@ -72,7 +72,7 @@ def run_code(execute: schemas.Execute, debug: bool = False):
 
     robot_commands, err = execute_code(code)
 
-    return schemas.ExecutionResponse(robot_commands=robot_commands.split(), err=err)
+    return schemas.ExecutionResponse(robot_commands=robot_commands.split(","), err=err)
 
 @app.post("/api/generate", response_model=schemas.GenerationResponse)
 def generate_code(generate: schemas.Generate, debug: bool = False):
@@ -80,7 +80,7 @@ def generate_code(generate: schemas.Generate, debug: bool = False):
     code = print_line_numbers(gen_code) if debug else gen_code
     print(code)
     robot_commands, err = execute_code(code)
-    return schemas.GenerationResponse(robot_commands=robot_commands.split(), err=err, code=gen_code)
+    return schemas.GenerationResponse(robot_commands=robot_commands.split(","), err=err, code=gen_code)
 
 
 # app.mount("/", SPAStaticFiles(directory=".//app/build", html=True), name="frontend")
