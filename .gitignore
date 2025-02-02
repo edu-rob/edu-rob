@@ -5,6 +5,8 @@ myenv
 .idea/
 .code/
 **/__pycache__/
+**.next*
+**node_modules**
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
