@@ -1,7 +1,8 @@
 from pydantic import BaseModel
 
-class Test(BaseModel):
-    test_response: str
+class ExampleResponse(BaseModel):
+    name: str
+    contents: str
 
 class Execute(BaseModel):
     code: str

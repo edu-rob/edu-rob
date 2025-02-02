@@ -45,11 +45,11 @@ def execute_code(code: str) -> tuple[str, str]:
         return result, error
 
 @app.get("/api/examples/")
-def get_examples() -> dict[str, str]:
-    examples = {}
+def get_examples() -> list[schemas.ExampleResponse]:
+    examples = []
     for filename in os.listdir(EXAMPLES_FOLDER):
         with open(os.path.join(EXAMPLES_FOLDER, filename), "r") as file:
-            examples.update({filename: file.read()})
+            examples.append(schemas.ExampleResponse(name=filename, contents=file.read()))
     return examples
 
 @app.post("/api/execute", response_model=schemas.ExecutionResponse)
