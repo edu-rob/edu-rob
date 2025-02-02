@@ -6,11 +6,22 @@ import { bluetoothInit, getDevice, disconnectDevice, sendDataToDevice, getDataFr
 import NavBar from "../components/navBar/navBar";
 import { api } from "../page";
 
+interface genResponse {
+  robot_commands: string,
+  error: string,
+  code: string
+}
+
+interface executeResponse {
+  robot_commands: string,
+  error: string
+}
+
 
 export default function Connect() {
   const [inputValue, setInputValue] = useState("");
   const [textAreaValue, setTextAreaValue] = useState("");
-  const [execRespValue, setExecResp] = useState("");
+  const [errorValue, setErrorValue] = useState("");
 
 
   return (
@@ -24,7 +35,7 @@ export default function Connect() {
       {/* Bluetooth Connection Section */}
       <BluetoothConnect inputValue={inputValue} setInputValue={setInputValue}
         textAreaValue={textAreaValue} setTextAreaValue={setTextAreaValue}
-        execRespValue={execRespValue} setExecResp={setExecResp} />
+        errorValue={errorValue} setErrorValue={setErrorValue} />
     </>
   );
 }
@@ -79,15 +90,15 @@ function BluetoothConnect({
   setInputValue,
   textAreaValue,
   setTextAreaValue,
-  execRespValue,
-  setExecResp
+  errorValue,
+  setErrorValue
 }: {
   inputValue: string;
   setInputValue: React.Dispatch<React.SetStateAction<string>>;
   textAreaValue: string;
   setTextAreaValue: React.Dispatch<React.SetStateAction<string>>;
-  execRespValue: string;
-  setExecResp: React.Dispatch<React.SetStateAction<string>>;
+  errorValue: string;
+  setErrorValue: React.Dispatch<React.SetStateAction<string>>;
 }) {
 
   // Handler for the input's onChange event
@@ -120,23 +131,24 @@ function BluetoothConnect({
             onChange={handleTextAreaChange}
             rows={20}
           ></textarea>
+          <label> {errorValue} </label>
         </div>
         <ConnectPanel inputValue={inputValue} textAreaValue={textAreaValue}
-          execRespValue={execRespValue} setExecResp={setExecResp} setTextAreaValue={setTextAreaValue} />
+          execRespValue={errorValue} setTextAreaValue={setTextAreaValue} setErrorValue={setErrorValue} />
       </div>
     </section>
   )
 }
-
 interface ExampleFile {
   name: string,
   contents: string
 }
 
-function ConnectPanel({ inputValue, textAreaValue, execRespValue, setExecResp, setTextAreaValue }:
+function ConnectPanel({ inputValue, textAreaValue, execRespValue, setTextAreaValue, setErrorValue }:
   {
     inputValue: string; textAreaValue: string, execRespValue: string,
-    setExecResp: React.Dispatch<React.SetStateAction<string>>, setTextAreaValue: React.Dispatch<React.SetStateAction<string>>
+    setTextAreaValue: React.Dispatch<React.SetStateAction<string>>,
+    setErrorValue: React.Dispatch<React.SetStateAction<string>>
   }) {
   const [connectionStatus, setConnectionStatus] = useState("Not connected");
   const [deviceName, setDeviceName] = useState<string | null>(null);
@@ -169,7 +181,6 @@ function ConnectPanel({ inputValue, textAreaValue, execRespValue, setExecResp, s
     api.post("/execute", { "code": textAreaValue }).then(response => {
       let toSubmit = response.data
       console.log("Code executed: " + toSubmit);
-      setExecResp(toSubmit);
       console.log("Sending code: " + toSubmit);
       return;
     })
@@ -179,9 +190,15 @@ function ConnectPanel({ inputValue, textAreaValue, execRespValue, setExecResp, s
   const genCode = () => {
     /* TODO: Debug */
     api.post("/generate", { "prompt": inputValue }).then(response => {
-      console.log("Generated code: " + response.data);
-      sendDataToDevice(response.data)
-      console.log("Sending code: " + response.data)
+      let data: genResponse = response.data
+
+      if (data.error == "") {
+        setErrorValue(data.error)
+      }
+
+      console.log("Generated code: " + data.code);
+      setTextAreaValue(data.code);
+      console.log("Sending code: " + data.code)
     })
   }
 
