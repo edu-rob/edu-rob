@@ -250,6 +250,15 @@ button {
   background-color: #16a085;
 }
 
+.GenerateButton {
+  background-color: #272727;
+  color: whitesmoke;
+}
+
+.GenerateButton:hover {
+  background-color: #434343;
+}
+
 /* Status Label */
 .ConnectionStatus {
   display: block;

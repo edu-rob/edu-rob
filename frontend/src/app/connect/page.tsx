@@ -113,8 +113,9 @@ function BluetoothConnect({
   return (
     <section className="BluetoothConnectionSection">
       <div className="BluetoothConnectionContainer">
-        <h1 className="ConnectPageTitle">Bluetooth Connection</h1>
+        <h1 className="ConnectPageTitle">Learn How To Code A Robot</h1>
         <div className="InputPanelContainer">
+          <p>Type a text prompt into the box to control your robot, and press, Generate Code, to turn your prompt into Python!</p>
           <input
             name="PromptInput"
             id="PromptInput"
@@ -123,6 +124,7 @@ function BluetoothConnect({
             value={inputValue} // Controlled input value
             onChange={handleInputChange} // Update state on input change
           />
+          <p>Edit the generated Python, and see how it affects the robot!</p>
           <textarea
             name="ScriptOutputTextArea"
             id="ScriptOutputTextArea"
@@ -204,7 +206,6 @@ function ConnectPanel({ inputValue, textAreaValue, execRespValue, setTextAreaVal
 
       console.log("Generated code: " + data.code);
       setTextAreaValue(data.code);
-      sendDataToDevice(data.robot_commands).then(r => console.log("Response from Rob:" + r))
       console.log("Sending code: " + data.robot_commands)
     }).catch(err => console.log(err))
   }

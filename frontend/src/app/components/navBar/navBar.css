@@ -30,6 +30,8 @@
   z-index: 1000;
   /* Ensure it stays above other elements */
   margin-inline: 10px;
+  display: flex;
+  flex-direction: row;
 }
 
 /* Navbar Title */
