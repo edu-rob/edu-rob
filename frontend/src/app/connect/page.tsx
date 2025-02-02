@@ -113,7 +113,7 @@ function BluetoothConnect({
   return (
     <section className="BluetoothConnectionSection">
       <div className="BluetoothConnectionContainer">
-        <h1 className="ConnectPageTitle">Bluetooth Connection</h1>
+        <h1 className="ConnectPageTitle"> What do you want to learn? </h1>
         <div className="InputPanelContainer">
           <input
             name="PromptInput"
